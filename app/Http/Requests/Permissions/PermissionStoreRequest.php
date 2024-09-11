@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Permissions;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UserUpdateRequest extends FormRequest
+class PermissionStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,8 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'password' => ['nullable']
+            'name' => ['required', Rule::unique('permissions')->ignore($this->permission)],
+            'description' => ['required']
         ];
     }
 }

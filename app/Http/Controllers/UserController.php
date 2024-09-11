@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\DTO\Users\CreateUserDTO;
 use App\DTO\Users\UpdateUserDTO;
-use App\Http\Requests\UserStoreRequest;
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\Users\UserStoreRequest;
+use App\Http\Requests\Users\UserUpdateRequest;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
