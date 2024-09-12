@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserStoreRequest extends FormRequest
 {
@@ -23,7 +24,8 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'description' => ['nullable']
+            'email' => ['required', Rule::unique('users')],
+            'password' => ['required']
         ];
     }
 }
