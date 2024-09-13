@@ -87,8 +87,11 @@ class UserRepository
         return $user->permissions()->get();
     }
 
-    public function hasPermissions(User $user, $permissionName)
+    public function hasPermissions(User $user, $permissionName): bool
     {
+        if($user->isSuporAdmin()){
+            return true;
+        }
         return $user->permissions()->where('name', $permissionName)->exists();
     }
 }

@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Permission::class);
     }
+
+    public function isSuporAdmin()
+    {
+        return in_array($this->email, config('acl.super-admin'));
+    }
 }
