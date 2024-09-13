@@ -24,7 +24,6 @@ class UserController extends Controller
         return $this->userRepository->getAllUsers($totalPerPage, $page, $filter);
     }
 
- 
     public function store(UserStoreRequest $request)
     {
         return $this->userRepository->create(new CreateUserDTO(...$request->validated()));

@@ -18,6 +18,7 @@ class UserRepository
                 $query->where('name', 'LIKE', "%{$filter}%");
             }
         })
+        ->with('permissions')
         ->paginate($totalPerPage, ['*'], 'page', $page);
         
         return $users;
@@ -63,5 +64,31 @@ class UserRepository
     public function findByEmail($email)
     {
         return $this->user->where('email', $email)->first();
+    }
+
+    public function syncPermissions($userId, $permissions)
+    {
+        if(!$user = $this->getUserById($userId))
+        {
+           return null;
+        }
+        $user->permissions()->sync($permissions);
+        return true;
+    }
+
+    public function getPermissionsByUserId($userId)
+    {
+   
+        if(! $user = $this->getUserById($userId));
+        {
+            response()->json(['message' => 'User not found'], 404);
+        }
+
+        return $user->permissions()->get();
+    }
+
+    public function hasPermissions(User $user, $permissionName)
+    {
+        return $user->permissions()->where('name', $permissionName)->exists();
     }
 }
